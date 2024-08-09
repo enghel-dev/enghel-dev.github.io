@@ -8,6 +8,13 @@ body {
     line-height: 1.6;
 }
 
+/*Ajuste para celulares */
+
+@media (max-width: 768px) {
+padding: 10px;
+width: 95%;
+ }
+
 /* Encabezado */
 header {
     background: #ffe4e1;
