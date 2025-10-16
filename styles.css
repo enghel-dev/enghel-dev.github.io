@@ -1,0 +1,862 @@
+/* --- PALETA DE COLORES MENTES PINOLERAS --- */
+:root {
+    --mp-cyan: #00A7B5;       /* Turquesa vibrante, ideal para elementos interactivos y acentos */
+    --mp-yellow: #FABD00;     /* Amarillo cálido, complementa al cian, para énfasis */
+    --mp-red: #C42A1D;        /* Rojo distintivo, para acciones críticas o alertas */
+    --mp-white: #F7F5F2;      /* Blanco roto, para fondos limpios y texto claro */
+    --mp-dark: #2D2A26;       /* Gris oscuro/negro, para texto principal y fondos oscuros */
+    --mp-light-grey: #e2e8f0; /* Un gris muy claro para bordes sutiles y separadores */
+}
+
+/* --- ESTILOS BASE Y RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--mp-dark);
+    background: var(--mp-white); /* Fondo principal de la aplicación */
+    min-height: 100vh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- SISTEMA DE NOTIFICACIONES --- */
+#notification-box {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--mp-dark);
+    color: var(--mp-white);
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 9999;
+    font-size: 1rem;
+    max-width: 300px;
+    text-align: center;
+}
+
+/* --- LOADER GLOBAL --- */
+#global-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(247, 245, 242, 0.8); /* mp-white con transparencia */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+#global-loader > div {
+    padding: 2rem;
+    background: var(--mp-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 1.2rem;
+    color: var(--mp-dark);
+}
+
+
+/* --- VISTA DE LOGIN --- */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    /* Usando los colores de la paleta para un gradiente inspirador */
+    background: linear-gradient(135deg, var(--mp-cyan) 0%, var(--mp-yellow) 100%);
+}
+
+.login-card {
+    background: var(--mp-white);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-header {
+    margin-bottom: 2rem;
+}
+
+.login-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    /* Gradiente con los colores principales */
+    background: linear-gradient(90deg, var(--mp-cyan), var(--mp-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    color: var(--mp-dark); /* Texto más oscuro para legibilidad */
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.login-content {
+    text-align: left;
+}
+
+.login-description {
+    color: var(--mp-dark);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.google-login-btn {
+    width: 100%;
+    background: var(--mp-red); /* Rojo para el botón de Google, destacando */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.2s ease;
+    margin-bottom: 2rem;
+}
+
+.google-login-btn:hover {
+    background: darken(var(--mp-red), 10%); /* Un rojo ligeramente más oscuro al pasar el ratón */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--mp-red), 0.3); /* Sombra con el color del botón */
+}
+
+.login-features {
+    display: grid;
+    gap: 1rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--mp-dark);
+    font-size: 0.9rem;
+}
+
+.feature-item i {
+    color: var(--mp-cyan); /* Íconos con el color principal */
+    width: 20px;
+}
+
+/* --- VISTA PRINCIPAL (APP) --- */
+.main-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.app-header {
+    background: var(--mp-dark); /* Header oscuro para contraste y elegancia */
+    color: var(--mp-white);
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-name {
+    font-weight: 500;
+    display: none;
+}
+
+.logout-btn {
+    background: var(--mp-red); /* Rojo para "Cerrar Sesión" */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: darken(var(--mp-red), 10%); /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Navegación por pestañas */
+.tab-navigation {
+    background: var(--mp-white);
+    border-bottom: 1px solid var(--mp-light-grey);
+    padding: 0 1rem;
+    overflow-x: auto;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 1rem 0.75rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--mp-dark);
+    font-size: 0.75rem;
+    font-weight: 500;
+    min-width: 80px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: var(--mp-cyan);
+    background: rgba(var(--mp-cyan), 0.1); /* Fondo sutil al pasar el ratón */
+}
+
+.tab-btn.active {
+    color: var(--mp-cyan);
+    border-bottom-color: var(--mp-cyan);
+}
+
+.tab-btn i {
+    font-size: 1.2rem;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    width: 100%;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--mp-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* --- TARJETAS DE RELATOS (POSTS) --- */
+.posts-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.relato-card { /* Renombrado de .post-card para consistencia */
+    background: var(--mp-white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    border: 1px solid var(--mp-light-grey); /* Borde sutil */
+}
+
+.relato-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+.relato-header { /* Renombrado de .post-header */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.relato-header h3 { /* Renombrado de .post-title */
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--mp-dark);
+    margin-bottom: 0.75rem;
+}
+
+.relato-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.btn-editar, .btn-borrar { /* Renombrado de .edit-btn, .delete-btn */
+    padding: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.btn-editar {
+    background: rgba(var(--mp-cyan), 0.1); /* Cian suave */
+    color: var(--mp-cyan);
+}
+
+.btn-editar:hover {
+    background: rgba(var(--mp-cyan), 0.2);
+}
+
+.btn-borrar {
+    background: rgba(var(--mp-red), 0.1); /* Rojo suave */
+    color: var(--mp-red);
+}
+
+.btn-borrar:hover {
+    background: rgba(var(--mp-red), 0.2);
+}
+
+.autor { /* Renombrado de .post-date */
+    color: var(--mp-dark);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.relato-card img { /* Renombrado de .post-image */
+    width: 100%;
+    max-height: 250px; /* Altura máxima para imágenes */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.contenido { /* Renombrado de .post-content */
+    color: var(--mp-dark);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* --- FORMULARIO DE EDICIÓN EN TARJETA --- */
+.relato-card .form-editar {
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.relato-card.is-editing .form-editar {
+    display: flex; /* Visible cuando la tarjeta está en modo edición */
+}
+
+/* Los elementos que no sean el formulario se ocultan en modo edición */
+.relato-card.is-editing > *:not(.form-editar) {
+    display: none;
+}
+
+.relato-card .form-editar input[type="text"],
+.relato-card .form-editar textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--mp-light-grey);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--mp-dark);
+    background: var(--mp-white);
+    transition: all 0.2s ease;
+}
+
+.relato-card .form-editar input[type="text"]:focus,
+.relato-card .form-editar textarea:focus {
+    outline: none;
+    border-color: var(--mp-cyan);
+    box-shadow: 0 0 0 2px rgba(0, 167, 181, 0.2);
+}
+
+.relato-card .form-editar textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.relato-card .form-editar button {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.relato-card .form-editar button[type="submit"] {
+    background: var(--mp-yellow);
+    color: var(--mp-dark);
+    border: none;
+}
+.relato-card .form-editar button[type="submit"]:hover {
+    background: darken(var(--mp-yellow), 10%);
+}
+
+.relato-card .form-editar .btn-cancelar-edicion {
+    background: var(--mp-light-grey);
+    color: var(--mp-dark);
+    border: 1px solid var(--mp-light-grey);
+}
+.relato-card .form-editar .btn-cancelar-edicion:hover {
+    background: darken(var(--mp-light-grey), 5%);
+}
+
+
+/* --- FORMULARIO DE PUBLICACIÓN --- */
+.publish-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.publish-form {
+    background: var(--mp-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--mp-light-grey);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    color: var(--mp-dark);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--mp-cyan);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    color: var(--mp-dark);
+    background: var(--mp-white);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--mp-yellow);
+    box-shadow: 0 0 0 3px rgba(0, 167, 181, 0.1);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.publish-btn {
+    width: 100%;
+    background: var(--mp-cyan); /* Color principal para publicar */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.publish-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 167, 181, 0.3); /* Sombra con el color del botón */
+}
+
+/* --- CALENDARIO --- */
+.calendar-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.event-card {
+    background: var(--mp-white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border: 1px solid var(--mp-light-grey);
+}
+
+.event-date {
+    background: var(--mp-yellow); /* Amarillo para destacar las fechas */
+    color: var(--mp-dark);
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    min-width: 80px;
+}
+
+.event-info h3 {
+    font-weight: 600;
+    color: var(--mp-dark);
+    margin-bottom: 0.5rem;
+}
+
+.event-info p {
+    color: var(--mp-dark);
+}
+
+/* --- BIBLIOTECA --- */
+.library-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.book-card {
+    background: var(--mp-white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.2s ease;
+    border: 1px solid var(--mp-light-grey);
+}
+
+.book-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--mp-cyan); /* Icono de libro */
+}
+
+.book-card h3 {
+    font-weight: 600;
+    color: var(--mp-dark);
+    margin-bottom: 0.5rem;
+}
+
+.book-card p {
+    color: var(--mp-dark);
+    font-size: 0.875rem;
+}
+
+/* --- JUEGOS --- */
+.games-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.game-card {
+    background: var(--mp-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.2s ease;
+    border: 1px solid var(--mp-light-grey);
+}
+
+.game-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+.game-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--mp-red); /* Color distintivo para iconos de juego */
+}
+
+.game-card h3 {
+    font-weight: 600;
+    color: var(--mp-dark);
+    margin-bottom: 0.75rem;
+}
+
+.game-card p {
+    color: var(--mp-dark);
+    margin-bottom: 1.5rem;
+}
+
+.play-btn {
+    background: var(--mp-yellow); /* Amarillo para el botón de jugar */
+    color: var(--mp-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.play-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(250, 189, 0, 0.3); /* Sombra con el color del botón */
+}
+
+/* --- MODALES --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--mp-dark), 0.7); /* Fondo oscuro semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: var(--mp-white);
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border: 1px solid var(--mp-light-grey);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0;
+    margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+    font-weight: 600;
+    color: var(--mp-dark);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--mp-dark);
+    padding: 0.25rem;
+    transition: color 0.2s ease;
+}
+.close-btn:hover {
+    color: var(--mp-red);
+}
+
+.edit-form {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.cancel-btn, .save-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancel-btn {
+    background: var(--mp-light-grey);
+    color: var(--mp-dark);
+    border: 1px solid var(--mp-light-grey);
+}
+
+.cancel-btn:hover {
+    background: darken(var(--mp-light-grey), 5%);
+}
+
+.save-btn {
+    background: var(--mp-cyan);
+    color: white;
+    border: none;
+}
+
+.save-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 167, 181, 0.3);
+}
+
+/* --- MODAL DE JUEGOS CULTURALES (AJUSTADO) --- */
+#gameModal.modal {
+    background: rgba(var(--mp-dark), 0.7); /* Fondo oscuro semitransparente */
+    z-index: 2000;
+}
+#gameModal.hidden {
+    display: none !important;
+}
+.game-modal-content {
+    background: var(--mp-white);
+    border-radius: 16px;
+    max-width: 420px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    padding-bottom: 1.5rem;
+    border: 1px solid var(--mp-light-grey);
+}
+.game-modal-content .modal-header {
+    padding: 1.5rem 1.5rem 0;
+    margin-bottom: 1rem;
+}
+.game-modal-body {
+    padding: 0 1.5rem;
+}
+.trivia-question h4, .map-game h4 {
+    margin-bottom: 1rem;
+    color: var(--mp-dark);
+    font-size: 1.1rem;
+}
+.trivia-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+.trivia-opt-btn {
+    width: 100%;
+    background: var(--mp-light-grey);
+    color: var(--mp-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.trivia-opt-btn:hover {
+    background: var(--mp-cyan);
+    color: white;
+}
+.guess-game blockquote {
+    background: var(--mp-white);
+    border-left: 4px solid var(--mp-cyan);
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    color: var(--mp-dark);
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05); /* Sombra sutil */
+}
+.guess-game input[type="text"] {
+    border: 1px solid var(--mp-cyan);
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--mp-dark);
+    background: var(--mp-white);
+}
+.guess-game input[type="text"]:focus {
+    outline: none;
+    border-color: var(--mp-yellow);
+    box-shadow: 0 0 0 2px rgba(var(--mp-cyan), 0.2);
+}
+.map-game ul {
+    list-style: disc inside;
+    color: var(--mp-dark);
+    padding-left: 1rem;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (min-width: 640px) {
+    .user-name {
+        display: block;
+    }
+    
+    .tab-btn {
+        min-width: 100px;
+        font-size: 0.875rem;
+    }
+    
+    .posts-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajuste para tablets */
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding: 3rem 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .calendar-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .tab-navigation {
+        justify-content: center;
+    }
+    
+    .tab-btn {
+        min-width: 120px;
+    }
+}

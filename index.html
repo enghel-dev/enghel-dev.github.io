@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentes Pinoleras - Comunidad Cultural Nicaragüense</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <!-- Firestore (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <link rel="icon" href="sources/Logo.png" type="image/x-icon">
+    <script>
+        // Autenticacion con firebase
+        const firebaseConfig = {
+        apiKey: "AIzaSyB_ERIwF-RIpPzJlh5vkL2mYZiXKvUByaw",
+        authDomain: "mentes-pinoleras.firebaseapp.com",
+        projectId: "mentes-pinoleras",
+        storageBucket: "mentes-pinoleras.firebasestorage.app",
+        messagingSenderId: "152294876213",
+        appId: "1:152294876213:web:b79f234b01d3f4c0117d7c"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+</head>
+<body>
+    <!-- Vista de Login -->
+    <div id="loginView" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-title">Mentes Pinoleras</h1>
+                <p class="login-subtitle">Conecta con la cultura nicaragüense</p>
+            </div>
+            
+            <div class="login-content">
+                <p class="login-description">
+                    Únete a nuestra comunidad para compartir historias, tradiciones y celebrar la riqueza cultural de Nicaragua.
+                </p>
+                
+                <button id="googleLoginBtn" class="google-login-btn">
+                    <i class="fab fa-google"></i>
+                    Continuar con Google
+                </button>
+                
+                <div class="login-features">
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <span>Comunidad activa</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-book"></i>
+                        <span>Historias culturales</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Eventos tradicionales</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vista Principal de la App -->
+    <div id="mainAppView" class="main-app hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">Mentes Pinoleras</h1>
+                <div class="user-menu">
+                    <img id="userAvatar" src="https://via.placeholder.com/32x32/4F46E5/FFFFFF?text=U" alt="Usuario" class="user-avatar">
+                    <span id="userName" class="user-name">Usuario</span>
+                    <button id="logoutBtn" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navegación por pestañas -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="feed">
+                <i class="fas fa-home"></i>
+                <span>Feed</span>
+            </button>
+            <button class="tab-btn" data-tab="publicar">
+                <i class="fas fa-plus"></i>
+                <span>Publicar</span>
+            </button>
+            <button class="tab-btn" data-tab="mis-publicaciones">
+                <i class="fas fa-user-edit"></i>
+                <span>Mis Publicaciones</span>
+            </button>
+            <button class="tab-btn" data-tab="calendario">
+                <i class="fas fa-calendar"></i>
+                <span>Calendario</span>
+            </button>
+            <button class="tab-btn" data-tab="biblioteca">
+                <i class="fas fa-book"></i>
+                <span>Biblioteca</span>
+            </button>
+            <button class="tab-btn" data-tab="juegos">
+                <i class="fas fa-gamepad"></i>
+                <span>Juegos</span>
+            </button>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <!-- Sección Feed -->
+            <section id="feed" class="tab-content active">
+                <div class="feed-container">
+                    <h2 class="section-title">Historias de Nuestra Cultura</h2>
+                    <div id="postsContainer" class="posts-container">
+                        <!-- Los posts se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Publicar -->
+            <section id="publicar" class="tab-content">
+                <div class="publish-container">
+                    <h2 class="section-title">Comparte tu Historia</h2>
+                    <form id="publishForm" class="publish-form">
+                        <div class="form-group">
+                            <label for="postTitle">Título de tu historia</label>
+                            <input type="text" id="postTitle" placeholder="Ej: La leyenda del Cadejo en mi pueblo" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postCategory">Categoría</label>
+                            <select id="postCategory" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option value="leyendas">Leyendas y Mitos</option>
+                                <option value="tradiciones">Tradiciones</option>
+                                <option value="gastronomia">Gastronomía</option>
+                                <option value="festivales">Festivales</option>
+                                <option value="historia">Historia</option>
+                                <option value="arte">Arte y Artesanías</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postContent">Contenido</label>
+                            <textarea id="postContent" placeholder="Comparte tu historia, tradición o experiencia cultural..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="postImage">Imagen (URL)</label>
+                            <input type="url" id="postImage" placeholder="https://ejemplo.com/imagen.jpg">
+                        </div>
+                        
+                        <button type="submit" class="publish-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Publicar Historia
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Sección Mis Publicaciones -->
+            <section id="mis-publicaciones" class="tab-content">
+                <div class="my-posts-container">
+                    <h2 class="section-title">Mis Publicaciones</h2>
+                    <div id="myPostsContainer" class="posts-container">
+                        <!-- Las publicaciones del usuario se cargarán aquí -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Calendario -->
+            <section id="calendario" class="tab-content">
+                <div class="calendar-container">
+                    <h2 class="section-title">Calendario Cultural</h2>
+                    <div class="calendar-grid">
+                        <div class="event-card">
+                            <div class="event-date">15 Sep</div>
+                            <div class="event-info">
+                                <h3>Día de la Independencia</h3>
+                                <p>Celebración nacional con desfiles y actividades culturales</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date">1-10 Ago</div>
+                            <div class="event-info">
+                                <h3>Fiestas Patronales de Managua</h3>
+                                <p>Santo Domingo de Guzmán - Tradición centenaria</p>
+                            </div>
+                        </div>
+                        <div class="event-card">
+                            <div class="event-date">7 Dic</div>
+                            <div class="event-info">
+                                <h3>La Purísima</h3>
+                                <p>Celebración religiosa más importante del país</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Biblioteca -->
+            <section id="biblioteca" class="tab-content">
+                <div class="library-container">
+                    <h2 class="section-title">Biblioteca Cultural</h2>
+                    <div class="library-grid">
+                        <div class="book-card">
+                            <div class="book-cover">📚</div>
+                            <h3>Leyendas Nicaragüenses</h3>
+                            <p>Recopilación de mitos y leyendas tradicionales</p>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">🍽️</div>
+                            <h3>Cocina Tradicional</h3>
+                            <p>Recetas ancestrales de la gastronomía nica</p>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">🎭</div>
+                            <h3>Danzas Folclóricas</h3>
+                            <p>Historia y pasos de nuestras danzas</p>
+                        </div>
+                        <div class="book-card">
+                            <div class="book-cover">🏛️</div>
+                            <h3>Historia Precolombina</h3>
+                            <p>Culturas indígenas de Nicaragua</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Juegos -->
+            <section id="juegos" class="tab-content">
+                <div class="games-container">
+                    <h2 class="section-title">Juegos Culturales</h2>
+                    <div class="games-grid">
+                        <div class="game-card">
+                            <div class="game-icon">🧩</div>
+                            <h3>Trivia Cultural</h3>
+                            <p>Pon a prueba tus conocimientos sobre Nicaragua</p>
+                            <button class="play-btn" onclick="startTrivia()">Jugar</button>
+                        </div>
+                        <div class="game-card">
+                            <div class="game-icon">🎯</div>
+                            <h3>Adivina la Tradición</h3>
+                            <p>Identifica tradiciones por sus descripciones</p>
+                            <button class="play-btn" onclick="startGuessGame()">Jugar</button>
+                        </div>
+                        <div class="game-card">
+                            <div class="game-icon">🗺️</div>
+                            <h3>Mapa Cultural</h3>
+                            <p>Explora lugares históricos de Nicaragua</p>
+                            <button class="play-btn" onclick="startMapGame()">Explorar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para editar posts -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Editar Publicación</h3>
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="editForm" class="edit-form">
+                <input type="hidden" id="editPostId">
+                <div class="form-group">
+                    <label for="editTitle">Título</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCategory">Categoría</label>
+                    <select id="editCategory" required>
+                        <option value="leyendas">Leyendas y Mitos</option>
+                        <option value="tradiciones">Tradiciones</option>
+                        <option value="gastronomia">Gastronomía</option>
+                        <option value="festivales">Festivales</option>
+                        <option value="historia">Historia</option>
+                        <option value="arte">Arte y Artesanías</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editContent">Contenido</label>
+                    <textarea id="editContent" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editImage">Imagen (URL)</label>
+                    <input type="url" id="editImage">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="closeEditModal()" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="save-btn">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="games.js"></script>
+</body>
+</html> 
