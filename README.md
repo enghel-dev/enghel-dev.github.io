@@ -1,6 +1,8 @@
 # Mentes Pinoleras
-![Mentes Pinoleras Logo](sources/Logo.png)
 Una aplicación web innovadora y educativa, diseñada para el reto **Hackathon Disruptivo 2025**.
+
+![Mentes Pinoleras Logo](sources/Logo.png). 
+
 
 ## 📝 Descripción
 Mentes Pinoleras es una plataforma dedicada a preservar, registrar y compartir los saberes populares, culturales y tradiciones de Nicaragua. Nuestra misión es involucrar activamente a la comunidad, fomentando que el patrimonio cultural llegue y sea adoptado por las nuevas generaciones.
