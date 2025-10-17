@@ -1,4 +1,5 @@
 # Mentes Pinoleras
+![Mentes Pinoleras Logo](.soruces/Logo.png)
 Una aplicación web innovadora y educativa, diseñada para el reto **Hackathon Disruptivo 2025**.
 
 ## 📝 Descripción
