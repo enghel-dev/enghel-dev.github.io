@@ -711,3 +711,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+//Dividimos las publicaciones y mandamos las categorias a otra pestaña
+// Claves canónicas de la Biblioteca
+const LIBRARY_LABELS = {
+  leyendas: "Leyendas",
+  cocina: "Cocina y tradiciones",
+  danzas: "Danzas Folclóricas",
+  historia: "Historia Precolombina",
+};
+
+function computeLibCategory(selectValue) {
+  const map = {
+    leyendas: "leyendas",
+    gastronomia: "cocina",
+    tradiciones: "cocina",
+    danzas: "danzas",
+    historia: "historia",
+    // festivales -> null (Feed)
+    // arte -> null (Feed)
+  };
+  return map[selectValue] || null; // null => se queda en Feed
+}
+
+// Para mostrar etiqueta bonita en tarjetas
+function prettyLibCat(libKey) {
+  return LIBRARY_LABELS[libKey] || null;
+}
